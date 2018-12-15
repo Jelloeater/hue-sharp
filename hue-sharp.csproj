@@ -2,8 +2,11 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <AssemblyName>hue-sharp</AssemblyName>
+    <RootNamespace>hue-sharp</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.3.0" />
     <PackageReference Include="EasyHttp" Version="1.7.0" />
   </ItemGroup>
 </Project>
