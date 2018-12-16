@@ -6,7 +6,7 @@ namespace huesharp
     {
         private static void Main()
         {
-            var lightList = Lights.GetLightLight();
+            var lightList = libs.Lights.GetLightLight();
             Console.WriteLine("EOP");
         } 
     }

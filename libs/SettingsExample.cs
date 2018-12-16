@@ -1,4 +1,4 @@
-﻿namespace huesharp
+﻿namespace libs
 {
     public class SettingsExample
 //    Rename me for your own usage to "Settings"

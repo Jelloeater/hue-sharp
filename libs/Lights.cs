@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace huesharp
+namespace libs
 {
-    internal class HttpHelper
+    internal static class HttpHelper
     {
-        public dynamic GetSiteJson(string siteIn)
+        public static dynamic GetSiteJson(string siteIn)
         {
             var http = new EasyHttp.Http.HttpClient();
             http.Request.Accept = EasyHttp.Http.HttpContentTypes.ApplicationJson;
@@ -15,13 +15,13 @@ namespace huesharp
 
     public class Light
     {
-        private string name;
-        private bool state;
+        private string _name;
+        private bool _state;
 
         public Light(bool state, string name)
         {
-            this.state = state;
-            this.name = name;
+            _state = state;
+            _name = name;
         }
     }
 
@@ -30,7 +30,7 @@ namespace huesharp
         public static List<Light> GetLightLight()
         {
             var lightList = new List<Light>();
-            var lightListRaw = new HttpHelper().GetSiteJson(Settings.BaseUrl).lights;
+            var lightListRaw = HttpHelper.GetSiteJson(Settings.BaseUrl).lights;
 
             foreach (var singleLight in lightListRaw)
             {

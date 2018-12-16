@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "hue-sharp", "hue-sharp.csproj", "{BB62B9A0-0A65-4066-B5D5-D16A5F56B550}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HueSharp", "HueSharp.csproj", "{BB62B9A0-0A65-4066-B5D5-D16A5F56B550}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
