@@ -2,17 +2,21 @@
 using CommandLine;
 using ConsoleTables;
 using libs;
+using NLog.Fluent;
 
 namespace huesharp
 {
     public class Options
     {
+        [Option('w', "startWeb", Required = false, HelpText = "Start micro web GUI.")]
+        public bool StartWeb { get; set; }
         [Option('l', "printLightList", Required = false, HelpText = "Prints list of lights.")]
         public bool PrintLights { get; set; }
         [Option('o', "turnOnLight", Required = false, HelpText = "Turn on single light.")]
         public int TurnOnLight { get; set; }     
         [Option('f', "turnOffLight", Required = false, HelpText = "Turn off single light.")]
         public int TurnOffLight { get; set; }
+
     }
     
     internal static class Program
@@ -39,6 +43,13 @@ namespace huesharp
                     {
                         var l = new Light(idIn:o.TurnOffLight,stateIn:true,nameIn:"");
                         l.TurnOff();
+                    }
+                    
+                    if (o.StartWeb)
+                    {
+                        
+                        webServer.MainWebServer.Start();
+
                     }
                     
                 });
