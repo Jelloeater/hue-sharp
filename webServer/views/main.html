@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HueGo</title>
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+</head>
+<body>
+
+<h1>Light Table</h1>
+
+<p>
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>State</th>
+    </tr>
+
+    @Each
+    <tr>
+        <td>@Current.Name</td>
+        <td>@Current.State</td>
+    </tr>
+    @EndEach
+
+</table>
+
+
+<p>
+    @Each
+<form action="/light/on/@Current.Id" method="post">
+    <input type="submit" name="@Current.Name On" value="@Current.Name On"/>
+</form>
+
+<form action="/light/off/@Current.Id" method="post">
+    <input type="submit" name="@Current.Name Off" value="@Current.Name Off"/>
+</form>
+@EndEach
+
+
+</body>
+</html>

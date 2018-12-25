@@ -1,4 +1,5 @@
 ﻿using System;
+using libs;
 using Nancy;
 
 namespace huesharp.webServer
@@ -10,7 +11,6 @@ namespace huesharp.webServer
             var nancyHost = new Nancy.Hosting.Self.NancyHost(new Uri("http://localhost"));
             nancyHost.Start();
             Console.WriteLine("Web server running...");
-
             Console.ReadLine();
             nancyHost.Stop();
         }
@@ -19,8 +19,27 @@ namespace huesharp.webServer
     {
         public Module()
         {
-            Get("/greet/{name}", x => {
-                return string.Concat("Hello ", x.name);
+            Post("/light/on/{id}", x =>
+            {
+                var l = new Light(idIn:x.id,stateIn:false,nameIn:"");
+                l.TurnOn();
+                return HttpStatusCode.OK;
             });
+            
+            Post("/light/off/{id}", x =>
+            {
+                var l = new Light(idIn:x.id,stateIn:true,nameIn:"");
+                l.TurnOff();
+                return HttpStatusCode.OK;
+            });
+            
+            Get("/", x => {
+                var lightList = libs.Lights.GetLightList();
+                return View["webServer/views/main.html",lightList];
+            });
+            
+            
+            
         }
+        
     }}

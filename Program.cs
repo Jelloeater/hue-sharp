@@ -59,7 +59,7 @@ namespace huesharp
 
         private static void PrintTable()
         {
-            var lightList = Lights.GetLightLight();
+            var lightList = Lights.GetLightList();
             var table = new ConsoleTable("ID","Name", "State");
             
 

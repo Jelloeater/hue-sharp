@@ -60,7 +60,7 @@ namespace libs
 
     public static class Lights
     {
-        public static List<Light> GetLightLight()
+        public static List<Light> GetLightList()
         {
             var lightList = new List<Light>();
             var lightListRaw = HttpHelper.GetSiteJson(Settings.BaseUrl).lights;
