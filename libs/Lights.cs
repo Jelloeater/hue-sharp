@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Dynamic;
 using EasyHttp.Http;
 
@@ -27,7 +28,15 @@ namespace libs
             State = stateIn;
             Name = nameIn;
         }
-
+        
+        public Light(int idIn)
+        {
+            var lightRaw = HttpHelper.GetSiteJson(Settings.BaseUrl + "/lights/" + idIn.ToString());
+            Id = idIn;
+            Name = lightRaw.name;
+            State = lightRaw.state.on;        
+        }
+        
         public static dynamic TurnOn(int idIn)
         {
             var turnOnUrl = Settings.BaseUrl + "/lights/"+ idIn + "/state";

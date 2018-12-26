@@ -19,9 +19,9 @@ namespace huesharp
 
     }
     
-    internal static class Program
+    public static class Program
     {
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var logger = Logging.GetLogger();
 
