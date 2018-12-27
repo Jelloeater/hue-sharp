@@ -1,20 +1,29 @@
 ﻿using System;
 using libs;
 using Nancy;
+using System.Threading;
+using System.Threading.Tasks;
+using Nancy.Hosting.Self;
 
 namespace huesharp.webServer
 {
-    public static class MainWebServer
+    public class MainWebServer
     {
-        public static void Start()
+        NancyHost nancyHost = new Nancy.Hosting.Self.NancyHost(new Uri("http://localhost"));
+        public void Start()
         {
-            var nancyHost = new Nancy.Hosting.Self.NancyHost(new Uri("http://localhost"));
             nancyHost.Start();
             Console.WriteLine("Web server running...");
-            Console.ReadLine();
-            nancyHost.Stop();
+        }
+        public void Stop()
+        {
+            Console.WriteLine("Web server stopping...");
+            nancyHost.Stop(); 
         }
     }
+}
+
+
     public class Module : NancyModule
     {
         public Module()
@@ -41,5 +50,6 @@ namespace huesharp.webServer
             
             
         }
-        
-    }}
+
+    }
+    

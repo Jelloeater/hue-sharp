@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Threading;
 using CommandLine;
 using ConsoleTables;
+using huesharp.webServer;
 using libs;
-using NLog.Fluent;
 
 namespace huesharp
 {
@@ -21,6 +22,9 @@ namespace huesharp
     
     public static class Program
     {
+        private static readonly AutoResetEvent Closing = new AutoResetEvent(false);
+        private static readonly MainWebServer WebServ = new MainWebServer();
+        
         public static void Main(string[] args)
         {
             var logger = Logging.GetLogger();
@@ -47,22 +51,28 @@ namespace huesharp
                     
                     if (o.StartWeb)
                     {
-                        
-                        webServer.MainWebServer.Start();
-
-                    }
-                    
+                        WebServ.Start();
+                        Console.WriteLine("Ctrl+C to Stop");
+                        Console.CancelKeyPress += new ConsoleCancelEventHandler(OnExit); 
+                        Closing.WaitOne();
+                        // Blocks thread from ending due to the fact that dotNet treats it as a console app,
+                        // and does not respect typical readline for blocking on Linux -_-
+                    }  
                 });
             
             logger.Info("EOP");
         }
-
+        static void OnExit(object sender, ConsoleCancelEventArgs args)
+        {
+            WebServ.Stop();
+            Closing.Set();
+        }
+        
         private static void PrintTable()
         {
             var lightList = Lights.GetLightList();
             var table = new ConsoleTable("ID","Name", "State");
             
-
             foreach (Light i in lightList)
             {
                 table.AddRow(i.Id,i.Name, i.State);
